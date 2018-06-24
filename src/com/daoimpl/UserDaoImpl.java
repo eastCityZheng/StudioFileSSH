@@ -19,4 +19,15 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
             return usList.get(0);
         return null;
     }
+
+    @Override
+    public void add(UserEntity us) {
+        this.getHibernateTemplate().save(us);
+    }
+
+    @Override
+    public List<UserEntity> findOne(String account) {
+
+        return (List<UserEntity>) this.getHibernateTemplate().find("from UserEntity where uAccount=?",account);
+    }
 }

@@ -16,6 +16,8 @@
           <element id="library" level="project" name="org.springframework:spring-web:4.3.18.RELEASE" />
           <element id="library" level="project" name="mysql-connector-java-5.1.7-bin" />
           <element id="library" level="project" name="org.apache.struts:struts2-spring-plugin:2.5.16" />
+          <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="1.1" />
         </element>
       </element>
     </root>

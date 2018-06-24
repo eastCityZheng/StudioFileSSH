@@ -8,6 +8,7 @@ import com.service.UserService;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.Servlet;
+import java.util.List;
 
 /**
  * 用户管理的Action类
@@ -45,6 +46,19 @@ public class UserAction extends ActionSupport implements  ModelDriven<UserEntity
         }
 
         return SUCCESS;
+    }
+    //添加用户
+    public String add(){
+        List<UserEntity> us=userService.findOne(user.getuAccount());
+        System.out.println(us.size());
+        if(us.size()==0){
+            userService.add(user);
+            ServletActionContext.getRequest().setAttribute("result","true");
+        }
+        else{
+            ServletActionContext.getRequest().setAttribute("result","again");
+        }
+        return "add";
     }
 
     public UserEntity getUser() {

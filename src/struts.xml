@@ -7,10 +7,28 @@
 <struts>
     <constant name="struts.objectFactory" value="spring"></constant>
     <constant name="struts.multipart.saveDir" value="/tmp" />
+
     <package name="UserEntity" extends="struts-default" namespace="/">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
         <action name="user_*" class="userAction" method="{1}">
             <result name="success">/login.jsp</result>
-            <allowed-methods>login</allowed-methods>
+            <result name="add">/register.jsp</result>
+            <!--<allowed-methods>login</allowed-methods>-->
         </action>
     </package>
+
+    <package name="WorkroomEntity" extends="struts-default" namespace="/">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="workroom_*" class="workroomAction" method="{1}">
+            <result name="list">/register.jsp</result>
+        </action>
+    </package>
+
+    <package name="ProjectEntity" extends="struts-default" namespace="/">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="project_*" class="projectAction" method="{1}">
+            <result name="add">/Project/ProjectAdd.jsp</result>
+        </action>
+    </package>
+
 </struts>

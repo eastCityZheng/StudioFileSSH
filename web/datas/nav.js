@@ -6,11 +6,11 @@ var navs = [{
         {
             "title": "项目添加",
             "icon": "fa-table",
-            "href": "ProjectAdd.jsp"
+            "href": "Project/ProjectAdd.jsp"
         }, {
             "title": "项目查看",
             "icon": "fa-navicon",
-            "href": "ProjectList.jsp"
+            "href": "Project/ProjectList.jsp"
         }
     ]
 },{

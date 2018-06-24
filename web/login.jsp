@@ -78,7 +78,7 @@
     });
 
     function register() {
-        window.location.href="GetAllWorkroomServlet"
+        window.location.href="workroom_list"
     }
 </script>
 </body>

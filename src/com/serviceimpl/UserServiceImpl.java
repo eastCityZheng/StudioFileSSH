@@ -4,6 +4,8 @@ import com.dao.UserDao;
 import com.entity.UserEntity;
 import com.service.UserService;
 
+import java.util.List;
+
 /**
  * 员工管理层的实现类
  */
@@ -19,4 +21,16 @@ public class UserServiceImpl implements UserService {
         UserEntity exitUser=userdao.findByAccountAndPassword(us);
         return exitUser;
     }
+
+    @Override
+    public void add(UserEntity user) {
+        userdao.add(user);
+    }
+
+    @Override
+    public List<UserEntity> findOne(String account) {
+        return  userdao.findOne(account);
+    }
+
+
 }
