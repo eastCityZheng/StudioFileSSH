@@ -30,4 +30,12 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 
         return (List<UserEntity>) this.getHibernateTemplate().find("from UserEntity where uAccount=?",account);
     }
+
+    @Override
+    public String findOneName(int i) {
+        List<String> s=(List<String>)this.getHibernateTemplate().find("select uName from UserEntity where uId=?",i);
+        if(s.size()>0)
+            return s.get(0);
+        return null;
+    }
 }

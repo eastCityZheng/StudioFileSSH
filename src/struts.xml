@@ -5,8 +5,12 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
+    <!--将Struts托管给Spring-->
     <constant name="struts.objectFactory" value="spring"></constant>
+    <!--这是临时目录-->
     <constant name="struts.multipart.saveDir" value="/tmp" />
+    <!--上传文件的最大默认值-->
+    <constant name="struts.multipart.maxSize" value="5000000"></constant>
 
     <package name="UserEntity" extends="struts-default" namespace="/">
         <global-allowed-methods>regex:.*</global-allowed-methods>
@@ -28,6 +32,30 @@
         <global-allowed-methods>regex:.*</global-allowed-methods>
         <action name="project_*" class="projectAction" method="{1}">
             <result name="add">/Project/ProjectAdd.jsp</result>
+            <result name="list">/Project/ProjectList.jsp</result>
+            <result name="del">/Project/ProjectList.jsp</result>
+            <result name="edit">/Project/ProjectEdit.jsp</result>
+        </action>
+    </package>
+
+    <package name="CompetitionEntity" extends="struts-default" namespace="/">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="competition_*" class="competitionAction" method="{1}">
+            <result name="add" >/Competition/CompetitionAdd.jsp</result>
+            <result name="list">/Competition/CompetitionList.jsp</result>
+            <result name="del">/Competition/CompetitionList.jsp</result>
+            <result name="edit">/Competition/CompetitionEdit.jsp</result>
+            <result name="update">/Competition/CompetitionEdit.jsp</result>
+        </action>
+    </package>
+
+    <package name="SoftwareEntity" extends="struts-default" namespace="/">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="software_*" class="softwareAction" method="{1}">
+            <result name="add">/Software/SoftwareAdd.jsp</result>
+            <result name="list">/Software/SoftwareList.jsp</result>
+            <result name="del">/Software/SoftwareList.jsp</result>
+            <result name="edit">/Software/SoftwareEdit.jsp</result>
         </action>
     </package>
 

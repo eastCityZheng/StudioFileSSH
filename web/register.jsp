@@ -15,9 +15,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>注册</title>
-    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
 
 </head>
 
@@ -27,7 +27,7 @@
         <h1>注册</h1>
     </header>
     <div class="beg-login-main">
-        <s:form action="user_add" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
+        <form action="${pageContext.request.contextPath}/user_add" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe612;</i>
@@ -82,13 +82,13 @@
                 </div>
                 <div class="beg-clear"></div>
             </div>
-        </s:form>
+        </form>
     </div>
     <footer>
     </footer>
 </div>
 <input type="hidden" id="result" value="${result}">
-<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/layui/layui.js"></script>
 <script>
     layui.use(['layer', 'form'], function() {
         var layer = layui.layer,

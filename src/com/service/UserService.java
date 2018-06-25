@@ -15,4 +15,6 @@ public interface UserService {
     void add(UserEntity user);
 
     List<UserEntity> findOne(String account);
+    //获取用户姓名
+    String findOneName(int i);
 }

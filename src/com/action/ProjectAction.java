@@ -1,12 +1,18 @@
 package com.action;
 
+import com.entity.ProjectListEntity;
 import com.entity.ProjectfileEntity;
+import com.entity.UserEntity;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.service.ProjectService;
+import com.service.UserService;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProjectAction extends ActionSupport implements ModelDriven<ProjectfileEntity> {
@@ -31,6 +37,12 @@ public class ProjectAction extends ActionSupport implements ModelDriven<Projectf
         this.projectService = projectService;
     }
 
+    private UserService userService;
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     public ProjectfileEntity getProjectfileEntity() {
         return projectfileEntity;
     }
@@ -41,7 +53,7 @@ public class ProjectAction extends ActionSupport implements ModelDriven<Projectf
 
     public String add (){
 
-        projectService.add(projectfileEntity);
+
         if(wordFileName!=null){
             upload(word,wordFileName);
             projectfileEntity.setpWord(wordFileName);
@@ -54,9 +66,58 @@ public class ProjectAction extends ActionSupport implements ModelDriven<Projectf
             upload(video,videoFileName);
             projectfileEntity.setpVideo(videoFileName);
         }
+        projectService.add(projectfileEntity);
         ServletActionContext.getRequest().setAttribute("result","true");
         return "add";
     }
+
+    public  String  list(){
+        UserEntity us=(UserEntity) ActionContext.getContext().getSession().get("user");
+        int w_id=us.getwId();
+        List<ProjectfileEntity> list=projectService.list(w_id);
+
+        List<ProjectListEntity> plList=new ArrayList<>();
+        for (ProjectfileEntity  pf:list){
+            ProjectListEntity pl=new ProjectListEntity();
+            pl.setUsername(userService.findOneName(pf.getuId()));
+            pl.setProjectfileEntity(pf);
+            plList.add(pl);
+        }
+        ServletActionContext.getRequest().setAttribute("list",plList);
+        return "list";
+    }
+
+    public String del(){
+        ProjectfileEntity pf=projectService.findOne(projectfileEntity.getpId());
+        projectService.del(pf);
+        list();
+        ServletActionContext.getRequest().setAttribute("result","true");
+        return "del";
+    }
+    public  String edit(){
+        ProjectfileEntity pf=projectService.findOne(projectfileEntity.getpId());
+        ServletActionContext.getRequest().setAttribute("pf",pf);
+        return "edit";
+    }
+
+    public  String update(){
+        if(wordFileName!=null){
+            upload(word,wordFileName);
+            projectfileEntity.setpWord(wordFileName);
+        }
+        if (codeFileName!=null){
+            upload(code,codeFileName);
+            projectfileEntity.setpCode(codeFileName);
+        }
+        if(videoFileName!=null){
+            upload(video,videoFileName);
+            projectfileEntity.setpVideo(videoFileName);
+        }
+        projectService.update(projectfileEntity);
+        ServletActionContext.getRequest().setAttribute("result","true");
+        return "edit";
+    }
+
 
     public File getWordFile() {
         return word;

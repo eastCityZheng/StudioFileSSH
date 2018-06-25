@@ -32,5 +32,8 @@ public class UserServiceImpl implements UserService {
         return  userdao.findOne(account);
     }
 
-
+    @Override
+    public String findOneName(int i) {
+        return userdao.findOneName(i);
+    }
 }

@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: dongcheng
-  Date: 2018/6/15
-  Time: 17:05
+  Date: 2018/6/17
+  Time: 19:45
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -21,7 +21,7 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>默认表格</legend>
+    <legend>比赛列表</legend>
 </fieldset>
 <div class="layui-form">
     <table class="layui-table">
@@ -37,56 +37,66 @@
             <th>文档</th>
             <th>源代码</th>
             <th>视频</th>
+            <th>证书</th>
             <th>提供者</th>
             <th>时间</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
-
-            <c:forEach items="${list}" var="l" >
+        <c:forEach items="${cpList}" var="cp" >
             <tr>
-                <td>${l.projectfileEntity.pName}</td>
-                <c:choose>
-                    <c:when test="${l.projectfileEntity.pWord==null||l.projectfileEntity.pWord==''}">
-                        <td>无</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>
-                            <a style="color:#ff5722" href="${pageContext.request.contextPath}/upload/${l.projectfileEntity.pWord}">${l.projectfileEntity.pWord}</a>
-                        </td>
-                    </c:otherwise>
-                </c:choose>
-                <c:choose>
-                    <c:when test="${l.projectfileEntity.pCode==null||l.projectfileEntity.pCode==''}">
-                        <td>无</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>
-                            <a style="color:#ff5722" href="${pageContext.request.contextPath}/upload/${l.projectfileEntity.pCode}">${l.projectfileEntity.pCode}</a>
-                        </td>
-                    </c:otherwise>
-                </c:choose>
-                <c:choose>
-                    <c:when test="${l.projectfileEntity.pVideo==null||l.projectfileEntity.pVideo==''}">
-                        <td>无</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>
-                            <a style="color:#ff5722" href="${pageContext.request.contextPath}/upload/${l.projectfileEntity.pVideo}">${l.projectfileEntity.pVideo}</a>
-                        </td>
-                    </c:otherwise>
-                </c:choose>
-                <td>${l.username}</td>
-                <td>${l.projectfileEntity.pTime}</td>
+                <th>${cp.competitionEntity.cName}</th>
+                <th>
+                    <c:choose>
+                        <c:when test="${cp.competitionEntity.cWord ==''||cp.competitionEntity.cWord ==null}">
+                            无
+                        </c:when>
+                        <c:otherwise>
+                            <a style="color:#ff5722" href="<%=basePath%>upload/${cp.competitionEntity.cWord}">${cp.competitionEntity.cWord}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </th>
+                <th>
+                    <c:choose>
+                        <c:when test="${cp.competitionEntity.cCode ==''||cp.competitionEntity.cCode ==null}">
+                            无
+                        </c:when>
+                        <c:otherwise>
+                            <a style="color:#ff5722" href="<%=basePath%>upload/${cp.competitionEntity.cCode}">${cp.competitionEntity.cCode}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </th>
+                <th>
+                    <c:choose>
+                        <c:when test="${cp.competitionEntity.cVideo ==''||cp.competitionEntity.cVideo==null}">
+                            无
+                        </c:when>
+                        <c:otherwise>
+                            <a style="color:#ff5722" href="<%=basePath%>upload/${cp.competitionEntity.cVideo}">${cp.competitionEntity.cVideo}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </th>
+                <th>
+                    <c:choose>
+                        <c:when test="${cp.competitionEntity.cCertificate ==''||cp.competitionEntity.cCertificate==null}">
+                            无
+                        </c:when>
+                        <c:otherwise>
+                            <a style="color:#ff5722" href="<%=basePath%>upload/${cp.competitionEntity.cCertificate}">${cp.competitionEntity.cCertificate}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </th>
+                <%--提供者--%>
+                <th>${cp.username}</th>
+                <th>${cp.competitionEntity.cTime}</th>
+                <th id="layer">
+                    <button  id="edit" data-method="edit" data-type="${cp.competitionEntity.cId}" data-path="<%=basePath%>" class="layui-btn layui-btn-mini">编辑</button>
+                    <button  id="deletee" data-method="deletee" data-type="${cp.competitionEntity.cId}" class="layui-btn layui-btn-mini">删除</button>
+                </th>
 
-                <td id="layer">
-                    <button  id="edit" data-method="edit" data-type="${l.projectfileEntity.pId}" data-path="<%=basePath%>" class="layui-btn layui-btn-mini">编辑</button>
-                    <button  id="deletee" data-method="deletee" data-type="${l.projectfileEntity.pId}" class="layui-btn layui-btn-mini">删除</button>
-                </td>
             </tr>
-            </c:forEach>
-        </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>
@@ -108,9 +118,9 @@
                 layer.open({
                     type: 1
                     , offset: '100px'
-                    , content: '<form class="layui-form" action="project_del" method="get">' +
-                    '<p style="position:absolute;top:90px;left:95px;font-size:18px;">确定要删除此项目文件么？</p>' +
-                    '<input type="text" name="pId" hidden="hidden" value="' + type + '"></input>' +
+                    , content: '<form class="layui-form" action="competition_del" method="get">' +
+                    '<p style="position:absolute;top:90px;left:95px;font-size:18px;">确定要删除此比赛文件么？</p>' +
+                    '<input type="text" name="cId" hidden="hidden" value="' + type + '"></input>' +
                     '<div style="position:absolute;top:120px;left:160px;"><button type="submit" class="layui-btn layui-btn-normal">确定</button></div></form>'
                     , btnAlign: 'c' //按钮居中
                     , shade: [0.8, '#393D49'] //显示遮罩
@@ -124,7 +134,7 @@
                 layer.open({
                     type: 2
                     ,offset:'20px'
-                    ,content:''+path+'project_edit?pId='+type+''
+                    ,content:''+path+'competition_edit?cId='+type+''
                     ,shade: [0.8, '#393D49'] //显示遮罩
                     ,area: ['800px', '500px']
                 });

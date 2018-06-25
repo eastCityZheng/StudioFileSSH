@@ -7,7 +7,7 @@
   Time: 17:05
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 
@@ -21,8 +21,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 
-    <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -30,7 +30,8 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
         <legend>项目文件添加</legend>
     </fieldset>
-    <s:form  method="post"  action="project_add" namespace="/" enctype="multipart/form-data" >
+    <form  method="post"  action="${pageContext.request.contextPath}/project_add" namespace="/" enctype="multipart/form-data" >
+
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">项目名称</label>
@@ -74,11 +75,11 @@
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
             </div>
         </div>
-    </s:form>
+    </form>
 
     <input type="hidden" id="result" value="${result}">
 </div>
-<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/layui/layui.js"></script>
 
 <script>
     layui.use(['form', 'layedit', 'laydate'], function() {

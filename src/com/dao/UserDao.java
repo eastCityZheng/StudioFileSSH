@@ -13,4 +13,6 @@ public interface UserDao {
     void add(UserEntity us);
 
     List<UserEntity> findOne(String account);
+
+    String findOneName(int i);
 }

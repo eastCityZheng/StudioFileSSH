@@ -45,7 +45,17 @@
     </bean>
     <bean id="projectAction" class="com.action.ProjectAction" scope="prototype">
         <property name="projectService" ref="projectService"></property>
+        <property name="userService" ref="userService"></property>
     </bean>
+    <bean id="competitionAction" class="com.action.CompetitionAction" scope="prototype">
+        <property name="competitionService" ref="competitionService"></property>
+        <property name="userService" ref="userService"></property>
+    </bean>
+    <bean name="softwareAction" class="com.action.SoftwareAction" scope="prototype">
+        <property name="softwareService" ref="softwareService"></property>
+        <property name="userService" ref="userService"></property>
+    </bean>
+
 
     <!--配置业务层的类-->
     <bean id="userService" class="com.serviceimpl.UserServiceImpl" >
@@ -57,6 +67,14 @@
     <bean id="projectService" class="com.serviceimpl.ProjectServiceImpl">
         <property name="projectDao" ref="projectDao"></property>
     </bean>
+    <bean id="competitionService" class="com.serviceimpl.CompetitionServiceImpl">
+        <property name="competitionDao" ref="competitionDao"></property>
+    </bean>
+    <bean id="softwareService" class="com.serviceimpl.SoftwareServiceImpl">
+        <property name="softwareDao" ref="softwareDao"></property>
+    </bean>
+
+
     <!--配置DAO的类-->
     <bean id="userDao" class="com.daoimpl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
@@ -67,6 +85,13 @@
     <bean id="projectDao" class="com.daoimpl.ProjectDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
+    <bean id="competitionDao" class="com.daoimpl.CompetitionDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="softwareDao" class="com.daoimpl.SoftwareDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
 
     <!-- 定义事务管理器 -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">

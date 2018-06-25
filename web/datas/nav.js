@@ -10,7 +10,7 @@ var navs = [{
         }, {
             "title": "项目查看",
             "icon": "fa-navicon",
-            "href": "Project/ProjectList.jsp"
+            "href": "project_list"
         }
     ]
 },{
@@ -25,7 +25,7 @@ var navs = [{
         }, {
             "title": "比赛查看",
             "icon": "fa-navicon",
-            "href": "Competition/CompetitionListServlet"
+            "href": "competition_list"
         }
     ]
 },{
@@ -40,7 +40,7 @@ var navs = [{
         }, {
             "title": "查看",
             "icon": "fa-navicon",
-            "href": "Software/SoftwareListServlet"
+            "href": "software_list"
         }
     ]
 },{
@@ -51,7 +51,7 @@ var navs = [{
         {
             "title": "人员查看",
             "icon": "fa-navicon",
-            "href": "People/PeopleListServlet"
+            "href": "people_list"
         }
     ]
 },{
