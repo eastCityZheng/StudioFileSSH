@@ -38,4 +38,28 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
             return s.get(0);
         return null;
     }
+
+    @Override
+    public List<UserEntity> findAll(int w_id) {
+        return (List<UserEntity>)this.getHibernateTemplate().find("from UserEntity where wId=?",w_id);
+    }
+
+    @Override
+    public UserEntity findOneById(int i) {
+        List<UserEntity> usList=(List<UserEntity>)this.getHibernateTemplate().find("from UserEntity where uId=?",i);
+        if (usList.size()>0)
+            return usList.get(0);
+        else
+        return null;
+    }
+
+    @Override
+    public void del(UserEntity us) {
+        this.getHibernateTemplate().delete(us);
+    }
+
+    @Override
+    public void update(UserEntity user) {
+        this.getHibernateTemplate().update(user);
+    }
 }

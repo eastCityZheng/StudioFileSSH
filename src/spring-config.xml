@@ -55,6 +55,10 @@
         <property name="softwareService" ref="softwareService"></property>
         <property name="userService" ref="userService"></property>
     </bean>
+    <bean id="bookAction" class="com.action.BookAction" scope="prototype">
+        <property name="bookService" ref="bookService"></property>
+        <property name="userService" ref="userService"></property>
+    </bean>
 
 
     <!--配置业务层的类-->
@@ -73,6 +77,9 @@
     <bean id="softwareService" class="com.serviceimpl.SoftwareServiceImpl">
         <property name="softwareDao" ref="softwareDao"></property>
     </bean>
+    <bean id="bookService" class="com.serviceimpl.BookServiceImpl">
+        <property name="bookDao" ref="bookDao"></property>
+    </bean>
 
 
     <!--配置DAO的类-->
@@ -89,6 +96,9 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="softwareDao" class="com.daoimpl.SoftwareDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="bookDao" class="com.daoimpl.BookDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 

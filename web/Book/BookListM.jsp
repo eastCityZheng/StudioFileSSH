@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: dongcheng
   Date: 2018/6/20
-  Time: 13:03
+  Time: 20:35
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -21,7 +21,7 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>用户列表</legend>
+    <legend>图书列表</legend>
 </fieldset>
 <div class="layui-form">
     <table class="layui-table">
@@ -33,30 +33,39 @@
         </colgroup>
         <thead>
         <tr>
-            <th>姓名</th>
-            <th>学号</th>
-            <th>班级</th>
-            <th>年级</th>
+            <th>书名</th>
+            <th>提供者</th>
+            <th>借阅状态</th>
+            <th>借阅者</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${usList}" var="us" >
-                <th>${us.uName}</th>
-                <th>${us.uAccount}</th>
-                <th>${us.uClass}</th>
-                <th>${us.uGrade}</th>
-                <th id="layer">
-                    <c:choose>
-                        <c:when test="${sessionScope.user.uType==0}">
+        <c:forEach items="${bkList}" var="bk" >
+            <th>${bk.bookEntity.bName}</th>
+            <th>${bk.bookEntity.bProvide}</th>
+            <th>
+                <c:choose>
+                    <c:when test="${bk.bookEntity.bStatus==0}">
+                        未借阅
+                    </c:when>
+                    <c:otherwise>
+                        已借阅
+                    </c:otherwise>
+                </c:choose>
+            </th>
+            <th>${bk.username}</th>
+            <th id="layer">
+                <c:choose>
+                    <c:when test="${sessionScope.user.uType==0}">
                         无权操作
-                        </c:when>
-                        <c:otherwise>
-                            <button  id="edit" data-method="edit" data-type="${us.uId}" data-path="<%=basePath%>" class="layui-btn layui-btn-mini">编辑</button>
-                            <button  id="deletee" data-method="deletee" data-type="${us.uId}" class="layui-btn layui-btn-mini">删除</button>
-                        </c:otherwise>
-                    </c:choose>
-                </th>
+                    </c:when>
+                    <c:otherwise>
+                        <button  id="edit" data-method="edit" data-path="<%=basePath%>" data-b_id="${bk.bookEntity.bId}" class="layui-btn layui-btn-mini">编辑</button>
+                        <button  id="deletee" data-method="deletee"  data-b_id="${bk.bookEntity.bId}" class="layui-btn layui-btn-mini">删除</button>
+                    </c:otherwise>
+                </c:choose>
+            </th>
             </tr>
         </c:forEach>
         </tbody>
@@ -73,32 +82,30 @@
 //触发事件
         var active = {
 
-            deletee: function (othis) {
-                var type = othis.data('type');
-
-                text = othis.text();
-                layer.open({
-                    type: 1
-                    , offset: '100px'
-                    , content: '<form class="layui-form" action="user_del" method="get">' +
-                    '<p style="position:absolute;top:90px;left:95px;font-size:18px;">确定要删除此用户信息么？</p>' +
-                    '<input type="text" name="uId" hidden="hidden" value="' + type + '"></input>' +
-                    '<div style="position:absolute;top:120px;left:160px;"><button type="submit" class="layui-btn layui-btn-normal">确定</button></div></form>'
-                    , btnAlign: 'c' //按钮居中
-                    , shade: [0.8, '#393D49'] //显示遮罩
-                    , area: ['400px', '300px']
-                });
-            },
             edit: function(othis){
-                var type = othis.data('type');
+                var b_id=othis.data('b_id');
                 var path=othis.data('path');
 
                 layer.open({
                     type: 2
                     ,offset:'20px'
-                    ,content:''+path+'user_edit?uId='+type+''
+                    ,content:''+path+'book_edit?bId='+b_id+''
                     ,shade: [0.8, '#393D49'] //显示遮罩
                     ,area: ['800px', '500px']
+                });
+            },
+            deletee: function(othis){
+                var b_id=othis.data('b_id');
+                layer.open({
+                    type: 1
+                    , offset: '100px'
+                    , content: '<form class="layui-form" action="book_del" method="get">' +
+                    '<p style="position:absolute;top:90px;left:95px;font-size:18px;">确定要删除此图书么？</p>' +
+                    '<input type="text" name="bId" hidden="hidden" value="' + b_id + '"></input>' +
+                    '<div style="position:absolute;top:120px;left:160px;"><button type="submit" class="layui-btn layui-btn-normal">确定</button></div></form>'
+                    , btnAlign: 'c' //按钮居中
+                    , shade: [0.8, '#393D49'] //显示遮罩
+                    , area: ['400px', '300px']
                 });
             }
         };
@@ -116,9 +123,9 @@
 
         var res=$("#result").attr("value");
         if(res=="true"){
-            layer.msg("删除成功!");
+            layer.msg("操作成功!");
         }else if(res=="false"){
-            layer.msg("删除失败，请稍后再试！")
+            layer.msg("操作失败，请稍后再试！")
         }
     })
 </script>

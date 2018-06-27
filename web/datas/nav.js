@@ -51,7 +51,7 @@ var navs = [{
         {
             "title": "人员查看",
             "icon": "fa-navicon",
-            "href": "people_list"
+            "href": "user_list"
         }
     ]
 },{
@@ -66,11 +66,11 @@ var navs = [{
         }, {
             "title": "借阅图书",
             "icon": "fa-table",
-            "href": "Book/BookListServlet"
+            "href": "book_list"
         }, {
             "title": "查看图书",
             "icon": "fa-table",
-            "href": "Book/BookListMServlet"
+            "href": "book_listm"
         }
     ]
 }

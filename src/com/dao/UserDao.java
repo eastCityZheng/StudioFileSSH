@@ -15,4 +15,12 @@ public interface UserDao {
     List<UserEntity> findOne(String account);
 
     String findOneName(int i);
+
+    List<UserEntity> findAll(int w_id);
+
+    UserEntity findOneById(int i);
+
+    void del(UserEntity us);
+
+    void update(UserEntity user);
 }

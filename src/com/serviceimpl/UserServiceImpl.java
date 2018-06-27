@@ -36,4 +36,26 @@ public class UserServiceImpl implements UserService {
     public String findOneName(int i) {
         return userdao.findOneName(i);
     }
+
+    @Override
+    public List<UserEntity> findAll(int w_id) {
+        return userdao.findAll(w_id);
+    }
+
+    @Override
+    public UserEntity findOneById(int i) {
+
+        return userdao.findOneById(i);
+    }
+
+    @Override
+    public void del(UserEntity us) {
+
+        userdao.del(us);
+    }
+
+    @Override
+    public void update(UserEntity user) {
+        userdao.update(user);
+    }
 }

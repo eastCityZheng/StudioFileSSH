@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: dongcheng
   Date: 2018/6/20
-  Time: 13:03
+  Time: 20:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -27,39 +27,26 @@
 <body>
 <div style="margin: 15px;">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend>用户信息编辑</legend>
+        <legend>图书信息编辑</legend>
     </fieldset>
-    <form method="post"  action="user_update"   >
+    <form method="post"  action="book_update"   >
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">姓名</label>
+                <label class="layui-form-label">书名</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="uName" value="${us.uName}" autocomplete="off" class="layui-input">
+                    <input type="text" name="bName" value="${bk.bName}" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">学号</label>
+                <label class="layui-form-label">提供者</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="uAccount" value="${us.uAccount}" autocomplete="off" class="layui-input">
+                    <input type="text" name="bProvide" value="${bk.bProvide}" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">班级</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="uClass" value="${us.uClass}" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">年级</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="uGrade" value="${us.uGrade}" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-        </div>
-        <input value="${us.uId}" name="uId" type="hidden">
+
+        <input value="${bk.bId}" name="bId" type="hidden">
 
         <div class="layui-form-item">
             <div class="layui-input-block">

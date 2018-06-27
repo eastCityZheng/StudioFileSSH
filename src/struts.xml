@@ -17,6 +17,10 @@
         <action name="user_*" class="userAction" method="{1}">
             <result name="success">/login.jsp</result>
             <result name="add">/register.jsp</result>
+            <result name="list">/People/PeopleList.jsp</result>
+            <result name="edit">/People/PeopleEdit.jsp</result>
+            <result name="del">/People/PeopleList.jsp</result>
+            <result name="admin">/TeaIndex.jsp</result>
             <!--<allowed-methods>login</allowed-methods>-->
         </action>
     </package>
@@ -25,6 +29,9 @@
         <global-allowed-methods>regex:.*</global-allowed-methods>
         <action name="workroom_*" class="workroomAction" method="{1}">
             <result name="list">/register.jsp</result>
+            <result name="add">/WorkRoom/WorkRoomAdd.jsp</result>
+            <result name="listm">/WorkRoom/WorkRoomList.jsp</result>
+            <result name="edit">/WorkRoom/WorkRoomEdit.jsp</result>
         </action>
     </package>
 
@@ -59,4 +66,13 @@
         </action>
     </package>
 
+    <package name="BookEntity" extends="struts-default" namespace="/">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="book_*" class="bookAction" method="{1}">
+            <result name="add">/Book/BookAdd.jsp</result>
+            <result name="list">/Book/BookList.jsp</result>
+            <result name="edit">/Book/BookEdit.jsp</result>
+            <result name="listm">/Book/BookListM.jsp</result>
+        </action>
+    </package>
 </struts>

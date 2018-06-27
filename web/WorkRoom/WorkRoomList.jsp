@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: dongcheng
-  Date: 2018/6/20
-  Time: 13:03
+  Date: 2018/6/26
+  Time: 17:02
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -21,7 +21,7 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>用户列表</legend>
+    <legend>比赛列表</legend>
 </fieldset>
 <div class="layui-form">
     <table class="layui-table">
@@ -33,29 +33,19 @@
         </colgroup>
         <thead>
         <tr>
-            <th>姓名</th>
-            <th>学号</th>
-            <th>班级</th>
-            <th>年级</th>
+            <th>工作室ID</th>
+            <th>工作室名称</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${usList}" var="us" >
-                <th>${us.uName}</th>
-                <th>${us.uAccount}</th>
-                <th>${us.uClass}</th>
-                <th>${us.uGrade}</th>
+        <c:forEach items="${workroom}" var="wr" >
+            <tr>
+                <th>${wr.wId}</th>
+                <th>${wr.wName}</th>
                 <th id="layer">
-                    <c:choose>
-                        <c:when test="${sessionScope.user.uType==0}">
-                        无权操作
-                        </c:when>
-                        <c:otherwise>
-                            <button  id="edit" data-method="edit" data-type="${us.uId}" data-path="<%=basePath%>" class="layui-btn layui-btn-mini">编辑</button>
-                            <button  id="deletee" data-method="deletee" data-type="${us.uId}" class="layui-btn layui-btn-mini">删除</button>
-                        </c:otherwise>
-                    </c:choose>
+                    <button  id="edit" data-method="edit" data-type="${wr.wId}" data-path="<%=basePath%>" class="layui-btn layui-btn-mini">编辑</button>
+                    <button  id="deletee" data-method="deletee" data-type="${wr.wId}" class="layui-btn layui-btn-mini">删除</button>
                 </th>
             </tr>
         </c:forEach>
@@ -80,9 +70,9 @@
                 layer.open({
                     type: 1
                     , offset: '100px'
-                    , content: '<form class="layui-form" action="user_del" method="get">' +
-                    '<p style="position:absolute;top:90px;left:95px;font-size:18px;">确定要删除此用户信息么？</p>' +
-                    '<input type="text" name="uId" hidden="hidden" value="' + type + '"></input>' +
+                    , content: '<form class="layui-form" action="workroom_del" method="get">' +
+                    '<p style="position:absolute;top:90px;left:95px;font-size:18px;">确定要删除此工作室信息么？</p>' +
+                    '<input type="text" name="wId" hidden="hidden" value="' + type + '"></input>' +
                     '<div style="position:absolute;top:120px;left:160px;"><button type="submit" class="layui-btn layui-btn-normal">确定</button></div></form>'
                     , btnAlign: 'c' //按钮居中
                     , shade: [0.8, '#393D49'] //显示遮罩
@@ -96,7 +86,7 @@
                 layer.open({
                     type: 2
                     ,offset:'20px'
-                    ,content:''+path+'user_edit?uId='+type+''
+                    ,content:''+path+'workroom_edit?wId='+type+''
                     ,shade: [0.8, '#393D49'] //显示遮罩
                     ,area: ['800px', '500px']
                 });
