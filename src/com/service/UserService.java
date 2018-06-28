@@ -25,4 +25,8 @@ public interface UserService {
     void del(UserEntity us);
     //更新用户
     void update(UserEntity user);
+    //更改用户类型
+    void type(UserEntity us);
+    //获取教师列表
+    List<UserEntity> findTea();
 }

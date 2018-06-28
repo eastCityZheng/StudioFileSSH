@@ -32,7 +32,7 @@
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe612;</i>
                 </label>
-                <input type="text" name="uAccount"  autocomplete="off" placeholder="这里输入用户名" class="layui-input">
+                <input type="text" name="uAccount"  autocomplete="off" placeholder="这里输入学号" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <label class="beg-login-icon">

@@ -23,4 +23,8 @@ public interface UserDao {
     void del(UserEntity us);
 
     void update(UserEntity user);
+
+    void type(UserEntity us);
+
+    List<UserEntity> findTea();
 }

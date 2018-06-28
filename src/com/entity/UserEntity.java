@@ -66,7 +66,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "u_class", nullable = false, length = 20)
+    @Column(name = "u_class", nullable = true, length = 20)
     public String getuClass() {
         return uClass;
     }
@@ -76,7 +76,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "u_grade", nullable = false, length = 10)
+    @Column(name = "u_grade", nullable = true, length = 10)
     public String getuGrade() {
         return uGrade;
     }

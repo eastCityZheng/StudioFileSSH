@@ -41,4 +41,13 @@ public class WorkroomDaoImpl extends HibernateDaoSupport implements WorkroomDao 
         else
         return null;
     }
+
+    @Override
+    public String findNameById(int i) {
+        List<String> list=(List<String>)this.getHibernateTemplate().find("select wName from WorkroomEntity where wId=?",i) ;
+        if(list.size()>0)
+            return list.get(0);
+        else
+        return null;
+    }
 }

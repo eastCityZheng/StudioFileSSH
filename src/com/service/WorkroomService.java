@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface WorkroomService {
     List<WorkroomEntity> getList();
-    //添加图书
+    //添加
     void add(WorkroomEntity workroomEntity);
 
     WorkroomEntity findOne(int i);
@@ -14,4 +14,6 @@ public interface WorkroomService {
     void del(WorkroomEntity wr);
 
     void update(WorkroomEntity workroomEntity);
+    //获取名称
+    String findNameById(int i);
 }

@@ -41,23 +41,42 @@
         </tr>
         </thead>
         <tbody>
+
         <c:forEach items="${usList}" var="us" >
-                <th>${us.uName}</th>
-                <th>${us.uAccount}</th>
-                <th>${us.uClass}</th>
-                <th>${us.uGrade}</th>
-                <th id="layer">
-                    <c:choose>
-                        <c:when test="${sessionScope.user.uType==0}">
-                        无权操作
-                        </c:when>
-                        <c:otherwise>
-                            <button  id="edit" data-method="edit" data-type="${us.uId}" data-path="<%=basePath%>" class="layui-btn layui-btn-mini">编辑</button>
-                            <button  id="deletee" data-method="deletee" data-type="${us.uId}" class="layui-btn layui-btn-mini">删除</button>
-                        </c:otherwise>
-                    </c:choose>
-                </th>
-            </tr>
+            <c:choose>
+
+                <c:when test="${us.uType!=2}">
+                    <tr>
+                        <th>${us.uName}</th>
+                        <th>${us.uAccount}</th>
+                        <th>${us.uClass}</th>
+                        <th>${us.uGrade}</th>
+                        <th id="layer">
+                            <c:choose>
+                                <c:when test="${sessionScope.user.uType==0}">
+                                    无权操作
+                                </c:when>
+                                <c:otherwise>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.user.uType==2}">
+                                            <c:choose>
+                                                <c:when test="${us.uType==0}">
+                                                    <button  id="settype" data-method="settype" data-type="1" data-uid="${us.uId}" class="layui-btn layui-btn-mini">设置为负责人</button>
+                                                </c:when>
+                                                <c:when test="${us.uType==1}">
+                                                    <button  id="settype" data-method="settype" data-type="0" data-uid="${us.uId}" class="layui-btn layui-btn-mini">取消负责人</button>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:when>
+                                    </c:choose>
+                                    <button  id="edit" data-method="edit" data-type="${us.uId}" data-path="<%=basePath%>" class="layui-btn layui-btn-mini">编辑</button>
+                                    <button  id="deletee" data-method="deletee" data-type="${us.uId}" class="layui-btn layui-btn-mini">删除</button>
+                                </c:otherwise>
+                            </c:choose>
+                        </th>
+                    </tr>
+                </c:when>
+            </c:choose>
         </c:forEach>
         </tbody>
     </table>
@@ -75,7 +94,6 @@
 
             deletee: function (othis) {
                 var type = othis.data('type');
-
                 text = othis.text();
                 layer.open({
                     type: 1
@@ -83,6 +101,23 @@
                     , content: '<form class="layui-form" action="user_del" method="get">' +
                     '<p style="position:absolute;top:90px;left:95px;font-size:18px;">确定要删除此用户信息么？</p>' +
                     '<input type="text" name="uId" hidden="hidden" value="' + type + '"></input>' +
+                    '<div style="position:absolute;top:120px;left:160px;"><button type="submit" class="layui-btn layui-btn-normal">确定</button></div></form>'
+                    , btnAlign: 'c' //按钮居中
+                    , shade: [0.8, '#393D49'] //显示遮罩
+                    , area: ['400px', '300px']
+                });
+            },
+            settype: function (othis) {
+                var type = othis.data('type');
+                var uid=othis.data('uid');
+                text = othis.text();
+                layer.open({
+                    type: 1
+                    , offset: '100px'
+                    , content: '<form class="layui-form" action="user_type" method="get">' +
+                    '<p style="position:absolute;top:90px;left:95px;font-size:18px;">确定要修改此用户类型么？</p>' +
+                    '<input type="text" name="uId" hidden="hidden" value="' + uid + '"></input>' +
+                    '<input type="text" name="uType" hidden="hidden" value="' + type + '"></input>' +
                     '<div style="position:absolute;top:120px;left:160px;"><button type="submit" class="layui-btn layui-btn-normal">确定</button></div></form>'
                     , btnAlign: 'c' //按钮居中
                     , shade: [0.8, '#393D49'] //显示遮罩
@@ -116,9 +151,9 @@
 
         var res=$("#result").attr("value");
         if(res=="true"){
-            layer.msg("删除成功!");
+            layer.msg("操作成功!");
         }else if(res=="false"){
-            layer.msg("删除失败，请稍后再试！")
+            layer.msg("操作失败，请稍后再试！")
         }
     })
 </script>

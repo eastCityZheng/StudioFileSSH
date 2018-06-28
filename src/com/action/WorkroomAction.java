@@ -66,4 +66,9 @@ public class WorkroomAction extends ActionSupport implements ModelDriven<Workroo
         return "edit";
     }
 
+    public String teaadd(){
+        list();
+        return "teaadd";
+    }
+
 }

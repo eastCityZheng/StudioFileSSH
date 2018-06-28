@@ -14,4 +14,6 @@ public interface WorkroomDao {
     void update(WorkroomEntity workroomEntity);
 
     WorkroomEntity findOne(int i);
+
+    String findNameById(int i);
 }

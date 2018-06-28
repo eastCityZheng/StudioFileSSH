@@ -13,5 +13,20 @@ var navtea = [{
             "href": "workroom_listm"
         }
     ]
+},{
+    "title": "教师管理",
+    "icon": "fa-cubes",
+    "spread": true,
+    "children": [
+        {
+            "title": "教师添加",
+            "icon": "fa-table",
+            "href": "workroom_teaadd"
+        }, {
+            "title": "教师查看",
+            "icon": "fa-navicon",
+            "href": "user_tealist"
+        }
+    ]
 }
 ];

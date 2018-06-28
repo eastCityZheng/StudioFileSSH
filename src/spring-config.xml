@@ -39,6 +39,7 @@
     <!--配置Action的类-->
     <bean id="userAction" class="com.action.UserAction" scope="prototype">
         <property name="userService" ref="userService"></property>
+        <property name="workroomService" ref="workroomService"></property>
     </bean>
     <bean id="workroomAction" class="com.action.WorkroomAction" scope="prototype">
         <property name="workroomService" ref="workroomService"></property>

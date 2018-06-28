@@ -62,4 +62,14 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
     public void update(UserEntity user) {
         this.getHibernateTemplate().update(user);
     }
+
+    @Override
+    public void type(UserEntity us) {
+        this.getHibernateTemplate().update(us);
+    }
+
+    @Override
+    public List<UserEntity> findTea() {
+        return (List<UserEntity>)this.getHibernateTemplate().find("from UserEntity where uType=?",2);
+    }
 }

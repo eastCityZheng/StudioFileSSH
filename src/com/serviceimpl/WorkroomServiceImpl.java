@@ -41,4 +41,9 @@ public class WorkroomServiceImpl implements WorkroomService {
     public void update(WorkroomEntity workroomEntity) {
         workroomDao.update(workroomEntity);
     }
+
+    @Override
+    public String findNameById(int i) {
+        return workroomDao.findNameById(i);
+    }
 }

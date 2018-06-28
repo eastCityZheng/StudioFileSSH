@@ -58,4 +58,14 @@ public class UserServiceImpl implements UserService {
     public void update(UserEntity user) {
         userdao.update(user);
     }
+
+    @Override
+    public void type(UserEntity us) {
+        userdao.type(us);
+    }
+
+    @Override
+    public List<UserEntity> findTea() {
+        return userdao.findTea();
+    }
 }

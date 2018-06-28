@@ -1,13 +1,16 @@
 package com.action;
 
+import com.entity.TeacherListEntity;
 import com.entity.UserEntity;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.service.UserService;
+import com.service.WorkroomService;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.Servlet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +34,12 @@ public class UserAction extends ActionSupport implements  ModelDriven<UserEntity
 
     public UserService getUserService() {
         return userService;
+    }
+
+    private WorkroomService workroomService;
+
+    public void setWorkroomService(WorkroomService workroomService) {
+        this.workroomService = workroomService;
     }
 
     public String login(){
@@ -95,6 +104,53 @@ public class UserAction extends ActionSupport implements  ModelDriven<UserEntity
         userService.update(user);
         ServletActionContext.getRequest().setAttribute("result","true");
         return "edit";
+    }
+
+    public String type(){
+        UserEntity us=userService.findOneById(user.getuId());
+        us.setuType(user.getuType());
+        userService.type(us);
+        list();
+        ServletActionContext.getRequest().setAttribute("result","true");
+        return "list";
+    }
+
+    public String tealist(){
+        List<UserEntity> usList=userService.findTea();
+        List<TeacherListEntity> teaList=new ArrayList<>();
+        for (UserEntity  us:usList){
+            TeacherListEntity teacherListEntity=new TeacherListEntity();
+            teacherListEntity.setUserEntity(us);
+            teacherListEntity.setWorkroomName(workroomService.findNameById(us.getwId()));
+            teaList.add(teacherListEntity);
+        }
+        ServletActionContext.getRequest().setAttribute("usList",teaList);
+        return  "tealist";
+    }
+
+    public  String teaadd(){
+        add();
+        return "teaadd";
+    }
+
+    public  String  teaedit(){
+        UserEntity userEntity=userService.findOneById(user.getuId());
+        ServletActionContext.getRequest().setAttribute("us",userEntity);
+        return "teaedit";
+    }
+
+    public String teadel(){
+        UserEntity userEntity=userService.findOneById(user.getuId());
+        userService.del(userEntity);
+        tealist();
+        ServletActionContext.getRequest().setAttribute("result","true" );
+        return "tealist";
+    }
+
+    public  String teaupdate(){
+        userService.update(user);
+        ServletActionContext.getRequest().setAttribute("result","true");
+        return  "teaedit";
     }
 
     public UserEntity getUser() {
